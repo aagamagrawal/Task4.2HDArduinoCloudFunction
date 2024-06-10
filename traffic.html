@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LED Control</title>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAUb0qTc0VcEcvBQe4KXlxeyvLNlCLg6Jk",
+      authDomain: "traffic-light-f4a2e.firebaseapp.com",
+      databaseURL: "https://traffic-light-f4a2e-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "traffic-light-f4a2e",
+      storageBucket: "traffic-light-f4a2e.appspot.com",
+      messagingSenderId: "564876456685",
+      appId: "1:564876456685:web:aa6f5be4e5a23a9c90d2e4",
+      measurementId: "G-ETDW6X3Z1X"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+
+    function toggleLED(color) {
+      const checkbox = document.getElementById(color);
+      const state = checkbox.checked ? "on" : "off";
+      firebase.database().ref(`/leds/${color}`).set(state);
+    }
+  </script>
+</head>
+<body>
+  <h1>LED Control</h1>
+  <form>
+    <label>
+      <input type="checkbox" id="red" onclick="toggleLED('red')"> Red LED
+    </label><br>
+    <label>
+      <input type="checkbox" id="green" onclick="toggleLED('green')"> Green LED
+    </label><br>
+    <label>
+      <input type="checkbox" id="yellow" onclick="toggleLED('yellow')"> Yellow LED
+    </label>
+  </form>
+</body>
+</html>
